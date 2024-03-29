@@ -78,12 +78,24 @@ avocado %>%
          Type=type)
 
 #8.	Add a column named PriceGroup that puts the rows into 10 bins with an approximately equal number of values.
-
-
-
-
+avocado %>%
+  group_by(region, year, type) %>%
+  summarize(
+    Count = n(),
+    TotaLBags = sum(TotalBags),
+    AveragePrice = mean(AveragePrice)
+  ) %>%
+  mutate(
+    PriceGroup = ntile(Count, 10)
+  ) %>%
+  rename(Region=region,
+         Year=year,
+         Type=type)
 
 #9. To confirm that the previous step worked correctly, display the AveragePrice and PriceGroup columns. Then, display the number of values in each bin.
+ table(avocado$PriceGroup)
+
+
 
 
 
