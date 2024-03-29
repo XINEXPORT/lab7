@@ -67,17 +67,15 @@ avocado %>%
 #10 Atlanta 2015 organic         52    61065.         1.71
 
 avocado %>%
-  group_by(region, year) %>%
+  group_by(region, year, type) %>%
   summarize(
-    type = first(type),
     Count = n(),
-    TotaLBags = mean(TotalBags),
+    TotaLBags = sum(TotalBags),
     AveragePrice = mean(AveragePrice)
   ) %>%
   rename(Region=region,
          Year=year,
          Type=type)
-
 
 #8.	Add a column named PriceGroup that puts the rows into 10 bins with an approximately equal number of values.
 
