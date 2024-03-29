@@ -79,25 +79,13 @@ avocado %>%
          Type=type)
 
 
-
-avocado %>%
-  group_by(region, year) %>%
-  summarize(
-    Type = toString(unique(type)),
-    Count = n(),
-    TotalBags = mean(TotalBags),
-    AveragePrice = mean(AveragePrice)
-  ) %>%
-  rename(
-    Region = region,
-    Year = year,
-    Count = Count,
-    TotalBags = TotalBags,
-    AveragePrice = AveragePrice
-  )
+#8.	Add a column named PriceGroup that puts the rows into 10 bins with an approximately equal number of values.
 
 
 
+
+
+#9. To confirm that the previous step worked correctly, display the AveragePrice and PriceGroup columns. Then, display the number of values in each bin.
 
 
 
