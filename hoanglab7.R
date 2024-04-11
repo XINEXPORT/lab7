@@ -11,6 +11,9 @@ library("skimr")
 install.packages("dplyr")
 library("dplyr")
 
+install.packages("tidyverse")
+library("tidyverse")
+
 #2. Read the data from the .csv file into a tibble and display the data.
 avocado<-read_csv("avocado.csv")
 avocado
@@ -82,7 +85,7 @@ avocado %>%
   group_by(region, year, type) %>%
   summarize(
     Count = n(),
-    TotaLBags = sum(TotalBags),
+    TotalBags = sum(TotalBags),
     AveragePrice = mean(AveragePrice)
   ) %>%
   mutate(
@@ -92,8 +95,15 @@ avocado %>%
          Year=year,
          Type=type)
 
+avocados <-avocado %>%
+  mutate(PriceGroup = ntile(AveragePrice, n=10))
+avocados
+
 #9. To confirm that the previous step worked correctly, display the AveragePrice and PriceGroup columns. Then, display the number of values in each bin.
- table(avocado$PriceGroup)
+avocados%>%
+  select(AveragePrice,PriceGroup)
+
+table(avocados$PriceGroup)
 
 
 
